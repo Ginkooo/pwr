@@ -16,6 +16,10 @@ def fractional_part(x):
     return x - floor(x)
 
 
+def mod(x, y):
+    return x - y*floor(x/y)
+
+
 def first_primes(n):
     primes = []
     possible_prime = 2
@@ -37,3 +41,18 @@ def is_permutation(seq):
             return False
         unique.add(e)
     return True
+
+
+def permutations_len_n(set, prefix, n, k):
+    if (k == 0):
+        if is_permutation(prefix):
+            yield prefix
+        return
+    for i in range(n):
+        new_prefix = prefix + (set[i],)
+        yield from permutations_len_n(set, new_prefix, n, k - 1)
+
+
+digits = list(range(10))
+for perm in permutations_len_n(digits, (), len(digits), 5):
+    print(perm)
