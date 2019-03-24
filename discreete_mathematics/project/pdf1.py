@@ -43,16 +43,17 @@ def is_permutation(seq):
     return True
 
 
-def permutations_len_n(set, prefix, n, k):
+def permutations_len_n(alphabet, prefix, k):
     if (k == 0):
         if is_permutation(prefix):
             yield prefix
         return
-    for i in range(n):
-        new_prefix = prefix + (set[i],)
-        yield from permutations_len_n(set, new_prefix, n, k - 1)
+    for l in alphabet:
+        new_prefix = prefix + (l,)
+        yield from permutations_len_n(alphabet, new_prefix, k - 1)
 
 
 digits = list(range(10))
-for perm in permutations_len_n(digits, (), len(digits), 5):
+for perm in permutations_len_n(digits, (), 8):
     print(perm)
+
